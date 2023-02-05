@@ -3,12 +3,11 @@ const bordyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt-nodejs');
 
-const app = require('express');
+const app = express();
 const knex = require('knex');
 
 const signin = require('./controllers/signin');
 const register = require('./controllers/register');
-const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
 const db = knex({
@@ -28,7 +27,7 @@ app.use(cors());
 app.post('/signin', (req,res) => {signin.handleSignin(req,res,db,bcrypt)});
 app.post('/register', (req,res) => {register.handleRegister(req,res,db,bcrypt)});
 app.put('/image', (req,res) => {image.handleImage(req,res,db)});
-app.put('imageurl', (req,res) => {image.handleApiCall(req,res)});
+app.put('/imageurl', (req,res) => {image.handleApiCall(req,res)});
 
 app.listen(3000, ()=>{
     console.log(`Server has started at port 3000`);
