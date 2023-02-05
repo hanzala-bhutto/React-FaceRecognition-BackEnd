@@ -26,7 +26,7 @@ app.use(bordyParser.json());
 app.use(cors());
 
 app.post('/signin', (req,res) => {signin.handleSignin(req,res,db,bcrypt)});
-// app.post('/register', (req,res) => {register.handleRegister(req,res,db)})
+app.post('/register', (req,res) => {register.handleRegister(req,res,db,bcrypt)});
 
 /*
 res = this is working
