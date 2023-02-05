@@ -27,6 +27,7 @@ app.use(cors());
 
 app.post('/signin', (req,res) => {signin.handleSignin(req,res,db,bcrypt)});
 app.post('/register', (req,res) => {register.handleRegister(req,res,db,bcrypt)});
+app.put('/image', (req,res) => {image.handleImage(req,res,db)});
 
 /*
 res = this is working
