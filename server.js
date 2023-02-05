@@ -1,8 +1,13 @@
 const express = require('express');
+const bordyParser = require('body-parser');
+const cors = require('cors');
+const bcrypt = require('bcrypt-nodejs');
+
+const app = require('express');
 const knex = require('knex');
 
-const register = require('./controllers/register');
 const signin = require('./controllers/signin');
+const register = require('./controllers/register');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
@@ -17,7 +22,11 @@ const db = knex({
     }
 })
 
+app.use(bordyParser.json());
+app.use(cors());
 
+app.post('/signin', (req,res) => {signin.handleSignin(req,res,db,bcrypt)});
+// app.post('/register', (req,res) => {register.handleRegister(req,res,db)})
 
 /*
 res = this is working
