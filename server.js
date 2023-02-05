@@ -30,6 +30,10 @@ app.post('/register', (req,res) => {register.handleRegister(req,res,db,bcrypt)})
 app.put('/image', (req,res) => {image.handleImage(req,res,db)});
 app.put('imageurl', (req,res) => {image.handleApiCall(req,res)});
 
+app.listen(3000, ()=>{
+    console.log(`Server has started at port 3000`);
+});
+
 /*
 res = this is working
 signin --> post
