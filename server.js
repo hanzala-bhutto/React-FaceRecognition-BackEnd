@@ -2,6 +2,7 @@ const express = require('express');
 const bordyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt-nodejs');
+require('dotenv').config();
 
 const app = express();
 const knex = require('knex');
@@ -10,14 +11,15 @@ const signin = require('./controllers/signin');
 const register = require('./controllers/register');
 const image = require('./controllers/image');
 
+
 const db = knex({
-    client: 'pg',
+    client: process.env.client,
     connection : {
-        host:'127.0.0.1',
-        port: 5432,
-        user: 'postgres',
-        password: 'fast',
-        database: 'smart-brain'
+        host:process.env.host,
+        port: process.env.port,
+        user: process.env.user,
+        password: process.env.password,
+        database: process.env.database
     }
 })
 
@@ -29,8 +31,8 @@ app.post('/register', (req,res) => {register.handleRegister(req,res,db,bcrypt)})
 app.put('/image', (req,res) => {image.handleImage(req,res,db)});
 app.put('/imageurl', (req,res) => {image.handleApiCall(req,res)});
 
-app.listen(3000, ()=>{
-    console.log(`Server has started at port 3000`);
+app.listen(process.env.SERVPORT, ()=>{
+    console.log(`Server has started at port ${process.env.SERVPORT}`);
 });
 
 /*
